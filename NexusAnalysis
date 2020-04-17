@@ -15,8 +15,8 @@ node{
         }
     }
    stage ('Upload war file to Nexus'){
-   nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/NexusPipeline/target/myweb-1.0.0.war']], 
-   mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.0']]]
+   nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/usr/share/maven']], 
+   mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.0']]], tagName: 'war'
    }
 
 
