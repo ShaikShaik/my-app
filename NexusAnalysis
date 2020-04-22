@@ -19,6 +19,10 @@ node{
    mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/NexusPipeline/target/myweb-0.0.7-SNAPSHOT.war']], 
    mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.1']]]
    }
-
+      stage('Deploy to Tomcat'){      
+      sshagent(['tomcat-dev']) {
+         sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.29.242:/opt/tomcat8/webapps/'
+      }
+   }
 
 }
