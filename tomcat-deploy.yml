@@ -1,0 +1,15 @@
+---
+- hosts: slave1
+  name: install webserver
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: install_apache2
+      apt:
+        name: apache2
+        state: latest
+    -  name: start httpd
+       service:
+         name: apache2
+         enabled: yes
+         state: started
