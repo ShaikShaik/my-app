@@ -19,10 +19,16 @@ node{
    mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/NexusPipeline/target/myweb-0.0.7-SNAPSHOT.war']], 
    mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.1']]]
    }
-      stage('Deploy to Tomcat'){      
+      stage('Copy YML File'){      
 
-         sh 'scp /var/lib/jenkins/AnsibleFiles/tomcat-setup.yml ubuntu@ip-172-31-10-207:/home/ubuntu
+         sh 'scp /var/lib/jenkins/AnsibleFiles/tomcat-setup.yml ubuntu@ip-172-31-10-207:/home/ubuntu'
              ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup.yml"'
+      }
+      
+            stage('Copy YML File'){      
+
+             sh 'ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup.yml"'
+             
       }
    
    
