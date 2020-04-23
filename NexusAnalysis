@@ -19,13 +19,13 @@ node{
    mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/NexusPipeline/target/myweb-0.0.7-SNAPSHOT.war']], 
    mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.1']]]
    }
-      stage('Copy YML File'){      
+      stage('Copy YML File from Jenkins to Ansible Server'){      
 
          sh 'scp /var/lib/jenkins/AnsibleFiles/tomcat-setup-update.yml ubuntu@ip-172-31-10-207:/home/ubuntu'
              
       }
       
-            stage('Deploy the File'){      
+            stage('Deploy the YAML File to install Tomcat'){      
 
              sh 'ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup-update.yml"'
              
