@@ -25,7 +25,7 @@ node{
              
       }
       
-            stage('Copy YML File'){      
+            stage('Deploy the File'){      
 
              sh 'ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup.yml"'
              
