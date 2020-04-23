@@ -20,11 +20,11 @@ node{
    mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.1']]]
    }
       stage('Deploy to Tomcat'){      
-      sshagent(['tomcat-dev']) {
+
          sh 'scp /var/lib/jenkins/AnsibleFiles/tomcat-setup.yml ubuntu@ip-172-31-10-207:/home/ubuntu
              ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup.yml"'
       }
-   }
+   
    
 
 }
