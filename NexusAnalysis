@@ -21,13 +21,13 @@ node{
    }
       stage('Copy YML File'){      
 
-         sh 'scp /var/lib/jenkins/AnsibleFiles/tomcat-setup.yml ubuntu@ip-172-31-10-207:/home/ubuntu'
+         sh 'scp /var/lib/jenkins/AnsibleFiles/tomcat-setup-update.yml ubuntu@ip-172-31-10-207:/home/ubuntu'
              
       }
       
             stage('Deploy the File'){      
 
-             sh 'ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup.yml"'
+             sh 'ssh ubuntu@ip-172-31-10-207 "ansible-playbook tomcat-setup-update.yml"'
              
       }
    
