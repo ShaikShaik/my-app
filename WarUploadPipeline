@@ -1,6 +1,6 @@
 node{
    stage('SCM Checkout'){
-     git branch: '/patch-1', url: 'https://github.com/somnathpb/rock-paper-scissors.git'
+     git branch: 'patch-1', url: 'https://github.com/somnathpb/rock-paper-scissors.git'
    }
    stage('Compile-Package'){
       // Get maven home path
