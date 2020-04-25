@@ -1,0 +1,32 @@
+node{
+   stage('SCM Checkout'){
+     git branch: '/patch-1', url: 'https://github.com/somnathpb/rock-paper-scissors.git'
+   }
+   stage('Compile-Package'){
+      // Get maven home path
+      def mvnHome =  tool name: 'maven-3', type: 'maven'   
+      sh "${mvnHome}/bin/mvn package"
+   }
+   
+   stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'maven-3', type: 'maven'
+        withSonarQubeEnv('sonar-6') { 
+          sh "${mvnHome}/bin/mvn sonar:sonar"
+        }
+    }
+   stage ('Upload war file to Nexus'){
+   nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', 
+   mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/NexusPipeline/target/myweb-0.0.7-SNAPSHOT.war']], 
+   mavenCoordinate: [artifactId: 'myweb', groupId: 'in.javahome', packaging: 'war', version: '1.0.1']]]
+   }
+      stage('Deploy War to Tomcat Server'){      
+
+         deploy adapters: [tomcat8(credentialsId: 'Tomcat_Pwd', path: '', url: 'http://3.228.14.91:8080')], contextPath: 'rps', war: '**/*.war'
+             
+      }
+      
+
+   
+   
+
+}
